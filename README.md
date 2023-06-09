@@ -1,12 +1,6 @@
 # Django Boiler-Plate
-Back-End for {company_name}.
+REST-API for scheduling rooms at IMPACT.T
 
-Visit the [Demo]() url.com 
-## Super user credentials for testing:
-````
-email: admin@gmail.com
-passwordl: admin
-````
 
 ## Getting Started
 
