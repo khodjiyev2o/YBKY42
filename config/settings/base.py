@@ -19,6 +19,7 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 LOCAL_APPS = [
+    "apps.rooms.apps.RoomsConfig",
     "apps.users.apps.UsersConfig",
     "apps.common.apps.CommonConfig",
 ]
@@ -26,6 +27,7 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "drf_yasg",
+    "django_filters",
 ]
 DJANGO_APPS = [
     "jazzmin",
@@ -109,6 +111,12 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework_simplejwt.authentication.JWTAuthentication",),
+    "DEFAULT_FILTER_BACKENDS": (
+        "django_filters.rest_framework.DjangoFilterBackend",
+        "rest_framework.filters.SearchFilter",
+    ),
+    "DEFAULT_PAGINATION_CLASS": "apps.rooms.pagination.CustomPagination",
+    "PAGE_SIZE": 10,
 }
 
 
