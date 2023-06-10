@@ -48,7 +48,7 @@ class TestRoomBookView(APITestCase):
             "end_time": "2023-06-09 12:00:00",
         }
         response = self.client.post(url, data=data)
-        assert response.status_code == 404
+        assert response.status_code == 410
         assert response.json()['error'] == "uzr, siz tanlagan vaqtda xona band"
 
     def test_room_book_start_time_after_end_time(self):
@@ -72,4 +72,3 @@ class TestRoomBookView(APITestCase):
         response = self.client.post(url, data=data)
         assert response.status_code == 200
         assert response.json()['message'] == "xona muvaffaqiyatli band qilindi"
-

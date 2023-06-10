@@ -23,7 +23,7 @@ class CreateBookingView(GenericAPIView):
         try:
             self.perform_create(serializer=serializer, room=room)
         except ValidationError:
-            return Response({"error": "uzr, siz tanlagan vaqtda xona band"}, status=404)
+            return Response({"error": "uzr, siz tanlagan vaqtda xona band"}, status=410)
         except InvalidTimeError:
             return Response({"error": "Notugri vaqt"}, status=404)
 
