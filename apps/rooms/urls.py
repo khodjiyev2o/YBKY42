@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .api_endpoints import List, Detail, Availability
+from .api_endpoints import Availability, Detail, List
 
 
 application_urlpatterns = [

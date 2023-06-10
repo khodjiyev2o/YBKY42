@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -5,7 +6,6 @@ from apps.common.models import BaseModel
 
 from .choices import RoomType
 from .managers import get_availability
-from django.core.exceptions import ValidationError
 
 
 class Room(BaseModel):
@@ -40,9 +40,7 @@ class Booking(BaseModel):
     def clean(self):
         if self.start_time and self.end_time:
             conflicting_bookings = Booking.objects.filter(
-                room=self.room,
-                start_time__lt=self.end_time,
-                end_time__gt=self.start_time
+                room=self.room, start_time__lt=self.end_time, end_time__gt=self.start_time
             )
             if conflicting_bookings.exists():
                 raise ValidationError(_("Booking conflicts with an existing booking."))

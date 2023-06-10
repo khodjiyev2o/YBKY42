@@ -5,7 +5,6 @@ from apps.rooms.models import Room, RoomType
 
 
 class TestRoomDetailView(APITestCase):
-
     def setUp(self):
         self.team_room = Room.objects.create(name="workly", type=RoomType.TEAM, capacity=5)
         self.conference_room = Room.objects.create(name="express24", type=RoomType.CONFERENCE, capacity=15)
@@ -24,5 +23,4 @@ class TestRoomDetailView(APITestCase):
         url = reverse("rooms-detail", kwargs={"pk": 111111111})
         response = self.client.get(url)
         assert response.status_code == 404
-        assert response.json()['detail'] == 'Not found.'
-
+        assert response.json()["detail"] == "Not found."
