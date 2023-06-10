@@ -1,8 +1,13 @@
 from django.contrib import admin
 
-from apps.rooms.models import Room
+from apps.rooms.models import Room, Booking
 
 
 @admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
     list_display = ("id", "name", "type")
+
+
+@admin.register(Booking)
+class BookingAdmin(admin.ModelAdmin):
+    list_display = ("id", "room", "start_time", "end_time")

@@ -5,7 +5,7 @@ from apps.rooms.models import Room
 
 
 class RoomListView(ListAPIView):
-    queryset = Room.objects.filter()
+    queryset = Room.objects.all()
     serializer_class = RoomListSerializer
     search_fields = ("name",)
     filterset_fields = ("type",)
