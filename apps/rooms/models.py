@@ -10,7 +10,7 @@ from .utils import get_availability
 
 
 class Room(BaseModel):
-    name = models.CharField(max_length=255, verbose_name=_("Name"))
+    name = models.CharField(max_length=255, verbose_name=_("Name"), unique=True)
     type = models.CharField(max_length=63, verbose_name=_("Room Type"), choices=RoomType.choices)
     capacity = models.PositiveIntegerField(verbose_name=_("Capacity"))
 
