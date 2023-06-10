@@ -1,4 +1,4 @@
-# Django Boiler-Plate
+# YBKY42 Back End
 REST-API for scheduling rooms at IMPACT.T
 
 
