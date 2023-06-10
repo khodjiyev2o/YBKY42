@@ -9,11 +9,8 @@ def get_availability(self, date=None):
     else:
         date = datetime.strptime(date, "%d-%m-%Y").date()
 
-    start_time = timezone.datetime.combine(date, timezone.datetime.min.time())
-    end_time = timezone.datetime.combine(date, timezone.datetime.max.time())
-
-    start_time = timezone.make_aware(start_time, timezone.get_current_timezone())
-    end_time = timezone.make_aware(end_time, timezone.get_current_timezone())
+    start_time = timezone.make_aware(timezone.datetime(date.year, date.month, date.day, 9, 0, 0))
+    end_time = timezone.make_aware(timezone.datetime(date.year, date.month, date.day, 18, 0, 0))
 
     booked_slots = self.bookings.filter(start_time__date=date, end_time__date=date).order_by("start_time")
     availability = []
@@ -21,8 +18,8 @@ def get_availability(self, date=None):
     if not booked_slots.exists():
         availability.append(
             {
-                "start": timezone.localtime(start_time.replace(hour=9)).strftime("%d-%m-%Y %H:%M:%S"),
-                "end": timezone.localtime(end_time.replace(hour=18, minute=0, second=0)).strftime("%d-%m-%Y %H:%M:%S"),
+                "start": timezone.localtime(start_time).strftime("%d-%m-%Y %H:%M:%S"),
+                "end": timezone.localtime(end_time).strftime("%d-%m-%Y %H:%M:%S"),
             }
         )
     else:

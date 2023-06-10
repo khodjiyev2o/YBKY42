@@ -5,7 +5,8 @@ from django.utils.translation import gettext_lazy as _
 from apps.common.models import BaseModel
 
 from .choices import RoomType
-from .managers import get_availability
+from .exceptions import InvalidTimeError
+from .utils import get_availability
 
 
 class Room(BaseModel):
@@ -27,6 +28,7 @@ class Room(BaseModel):
 
 class Booking(BaseModel):
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="bookings")
+    resident = models.CharField(max_length=255, verbose_name=_("Resident"))
     start_time = models.DateTimeField(verbose_name=_("Start Time"))
     end_time = models.DateTimeField(verbose_name=_("End Time"))
 
@@ -38,12 +40,15 @@ class Booking(BaseModel):
         verbose_name_plural = _("Booking")
 
     def clean(self):
+        """Check if there are any bookings in the given timeline before creating new one"""
         if self.start_time and self.end_time:
             conflicting_bookings = Booking.objects.filter(
                 room=self.room, start_time__lt=self.end_time, end_time__gt=self.start_time
             )
             if conflicting_bookings.exists():
-                raise ValidationError(_("Booking conflicts with an existing booking."))
+                raise ValidationError(_("uzr, siz tanlagan vaqtda xona band"))
+        if self.start_time >= self.end_time:
+            raise InvalidTimeError(_("Notugri, vaqt"))
 
     def save(self, *args, **kwargs):
         self.full_clean()
