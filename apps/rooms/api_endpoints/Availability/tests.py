@@ -68,4 +68,4 @@ class TestRoomAvailabilityView(APITestCase):
         url = reverse("rooms-availability", kwargs={"pk": 11111111})
         response = self.client.get(f"{url}?date=09-06-2023")
         assert response.status_code == 404
-        assert response.json()['error'] == "Xona mavjud emas"
+        assert response.json()["error"] == "Xona mavjud emas"

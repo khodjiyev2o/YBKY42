@@ -9,6 +9,7 @@ from apps.rooms.models import Room
 
 class CreateBookingView(GenericAPIView):
     """Send time in this format: YYYY-MM-DD hh:mm:ss"""
+
     serializer_class = BookingCreateSerializer
 
     def post(self, request, *args, **kwargs):

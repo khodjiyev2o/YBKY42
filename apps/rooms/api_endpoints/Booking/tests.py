@@ -38,7 +38,7 @@ class TestRoomBookView(APITestCase):
         }
         response = self.client.post(url, data=data)
         assert response.status_code == 404
-        assert response.json()['error'] == "Xona mavjud emas"
+        assert response.json()["error"] == "Xona mavjud emas"
 
     def test_room_book_already_booked_time(self):
         url = reverse("rooms-book", kwargs={"pk": self.team_room.id})
@@ -49,7 +49,7 @@ class TestRoomBookView(APITestCase):
         }
         response = self.client.post(url, data=data)
         assert response.status_code == 410
-        assert response.json()['error'] == "uzr, siz tanlagan vaqtda xona band"
+        assert response.json()["error"] == "uzr, siz tanlagan vaqtda xona band"
 
     def test_room_book_start_time_after_end_time(self):
         url = reverse("rooms-book", kwargs={"pk": self.team_room.id})
@@ -60,7 +60,7 @@ class TestRoomBookView(APITestCase):
         }
         response = self.client.post(url, data=data)
         assert response.status_code == 404
-        assert response.json()['error'] == "Notugri vaqt"
+        assert response.json()["error"] == "Notugri vaqt"
 
     def test_room_book_valid_date(self):
         url = reverse("rooms-book", kwargs={"pk": self.team_room.id})
@@ -71,4 +71,4 @@ class TestRoomBookView(APITestCase):
         }
         response = self.client.post(url, data=data)
         assert response.status_code == 200
-        assert response.json()['message'] == "xona muvaffaqiyatli band qilindi"
+        assert response.json()["message"] == "xona muvaffaqiyatli band qilindi"

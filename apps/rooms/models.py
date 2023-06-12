@@ -41,12 +41,15 @@ class Booking(BaseModel):
 
     def clean(self):
         """Check if there are any bookings in the given timeline before creating new one"""
+
         if self.start_time and self.end_time:
             conflicting_bookings = Booking.objects.filter(
                 room=self.room, start_time__lt=self.end_time, end_time__gt=self.start_time
             )
             if conflicting_bookings.exists():
                 raise ValidationError(_("uzr, siz tanlagan vaqtda xona band"))
+
+        """Start time should not be greater, than end_time"""
         if self.start_time >= self.end_time:
             raise InvalidTimeError(_("Notugri, vaqt"))
 

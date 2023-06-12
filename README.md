@@ -79,5 +79,3 @@ $ docker-compose -f docker-compose.prod.yml up -d --build
 
 ````
 
-10. Difference between production mode and development is that there is no 
-    nginx and gunicorn installed in development mode
