@@ -10,4 +10,4 @@ class RoomAdmin(admin.ModelAdmin):
 
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ("id", "room", "start_time", "end_time")
+    list_display = ("id", "room", "start", "end")

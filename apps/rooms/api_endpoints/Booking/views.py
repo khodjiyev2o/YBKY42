@@ -28,7 +28,7 @@ class CreateBookingView(GenericAPIView):
         except InvalidTimeError:
             return Response({"error": "Notugri vaqt"}, status=404)
 
-        return Response({"message": "xona muvaffaqiyatli band qilindi"})
+        return Response({"message": "xona muvaffaqiyatli band qilindi"}, status=201)
 
     def perform_create(self, serializer, room):
         serializer.save(room=room)

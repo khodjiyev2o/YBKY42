@@ -7,6 +7,7 @@ from apps.common.models import BaseModel
 from .choices import RoomType
 from .exceptions import InvalidTimeError
 from .utils import get_availability
+from datetime import datetime
 
 
 class Room(BaseModel):
@@ -29,11 +30,11 @@ class Room(BaseModel):
 class Booking(BaseModel):
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="bookings")
     resident = models.CharField(max_length=255, verbose_name=_("Resident"))
-    start_time = models.DateTimeField(verbose_name=_("Start Time"))
-    end_time = models.DateTimeField(verbose_name=_("End Time"))
+    start = models.DateTimeField(verbose_name=_("Start Time"))
+    end = models.DateTimeField(verbose_name=_("End Time"))
 
     def __str__(self):
-        return f"Room: {self.room} | {self.start_time} to {self.end_time}"
+        return f"Room: {self.room} | {self.start} to {self.end}"
 
     class Meta:
         verbose_name = _("Booking")
@@ -42,15 +43,15 @@ class Booking(BaseModel):
     def clean(self):
         """Check if there are any bookings in the given timeline before creating new one"""
 
-        if self.start_time and self.end_time:
+        if self.start and self.end:
             conflicting_bookings = Booking.objects.filter(
-                room=self.room, start_time__lt=self.end_time, end_time__gt=self.start_time
+                room=self.room, start__lt=self.end, end__gt=self.start
             )
             if conflicting_bookings.exists():
                 raise ValidationError(_("uzr, siz tanlagan vaqtda xona band"))
 
         """Start time should not be greater, than end_time"""
-        if self.start_time >= self.end_time:
+        if self.start >= self.end:
             raise InvalidTimeError(_("Notugri, vaqt"))
 
     def save(self, *args, **kwargs):

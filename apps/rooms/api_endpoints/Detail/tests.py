@@ -23,4 +23,4 @@ class TestRoomDetailView(APITestCase):
         url = reverse("rooms-detail", kwargs={"pk": 111111111})
         response = self.client.get(url)
         assert response.status_code == 404
-        assert response.json()["detail"] == "Not found."
+        assert response.json()["error"] == "topilmadi"

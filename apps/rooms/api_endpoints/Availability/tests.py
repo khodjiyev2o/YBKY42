@@ -17,14 +17,14 @@ class TestRoomAvailabilityView(APITestCase):
         self.team_room = Room.objects.create(name="workly", type=RoomType.TEAM, capacity=5)
         self.conference_room = Room.objects.create(name="express24", type=RoomType.CONFERENCE, capacity=15)
         self.booking_team_room = Booking.objects.create(
-            start_time=timezone.make_aware(datetime(2023, 6, 9, 9, 0, 0)),
-            end_time=timezone.make_aware(datetime(2023, 6, 9, 12, 0, 0)),
+            start=timezone.make_aware(datetime(2023, 6, 9, 9, 0, 0)),
+            end=timezone.make_aware(datetime(2023, 6, 9, 12, 0, 0)),
             room=self.team_room,
             resident="Samandar",
         )
         self.booking_conference_room = Booking.objects.create(
-            start_time=timezone.make_aware(datetime(2023, 6, 9, 11, 0, 0)),
-            end_time=timezone.make_aware(datetime(2023, 6, 9, 12, 0, 0)),
+            start=timezone.make_aware(datetime(2023, 6, 9, 11, 0, 0)),
+            end=timezone.make_aware(datetime(2023, 6, 9, 12, 0, 0)),
             room=self.conference_room,
             resident="Samandar",
         )

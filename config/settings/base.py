@@ -95,8 +95,11 @@ LANGUAGE_CODE = "en"
 TIME_ZONE = "Asia/Tashkent"
 
 USE_I18N = True
-
 USE_TZ = True
+DATE_INPUT_FORMATS = (
+    '%d-%m-%Y %H:%M:%S',
+    '%d-%m-%Y %H:%M',
+    '%d-%m-%Y',)
 
 
 STATIC_URL = "staticfiles/"
