@@ -5,6 +5,7 @@ __pycache__/
 
 # C extensions
 *.so
+.env
 .env.prod
 .env.dev.db
 .env.dev
